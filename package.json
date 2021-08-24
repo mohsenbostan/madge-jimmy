@@ -1,0 +1,33 @@
+{
+  "name": "madge-jimmy",
+  "version": "1.0.0",
+  "description": "Discord anti spam and phishing",
+  "main": "build/server.js",
+  "repository": "https://github.com/mohsenbostan/madge-jimmy",
+  "author": {
+    "name": "Mohsen Bostan",
+    "email": "mohsenbostandev@gmail.com"
+  },
+  "license": "MIT",
+  "scripts": {
+    "start": "node build/server.js",
+    "start:dev": "nodemon build/server.js",
+    "build:dev": "tsc --watch --preserveWatchOutput",
+    "build": "tsc -p .",
+    "dev": "concurrently \"npm:build:dev\" \"npm:start:dev\""
+  },
+  "devDependencies": {
+    "@types/node": "^16.7.1",
+    "concurrently": "^6.2.1",
+    "nodemon": "^2.0.12",
+    "typescript": "^4.3.5"
+  },
+  "dependencies": {
+    "@discordjs/rest": "^0.1.0-canary.0",
+    "discord-api-types": "^0.22.0",
+    "discord.js": "^13.1.0",
+    "dotenv": "^10.0.0",
+    "spam-detection": "^1.0.3",
+    "tslog": "^3.2.1"
+  }
+}
