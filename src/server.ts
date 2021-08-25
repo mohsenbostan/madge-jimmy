@@ -31,7 +31,7 @@ client.login(process.env.DISCORD_BOT_TOKEN);
 
 client.on('ready', () => {
     // Set the client user's activity
-    client.user.setActivity('madge-jimmy.vercel.app', { type: 'STREAMING' });
+    client.user?.setActivity('madge-jimmy.vercel.app', { type: 'PLAYING' });
 });
 
 client.on('messageCreate', message => {
