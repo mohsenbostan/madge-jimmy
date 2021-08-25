@@ -30,14 +30,14 @@ const client = new Discord.Client({ intents: [Discord.Intents.FLAGS.GUILDS, Disc
 client.login(process.env.DISCORD_BOT_TOKEN);
 
 client.on('messageCreate', message => {
-    const spamDetectionResult = SpamDetection.getResults(message.content).filter((x: { label: string, value: number }) => x.label === 'spam');
+    const spamDetectionResult = SpamDetection.getResults(message.content.replace(/(?:https?|ftp):\/\/[\n\S]+/g, '')).filter((x: { label: string, value: number }) => x.label === 'spam');
     if (spamDetectionResult.length > 0) {
         const spamDetectionValue = parseFloat(spamDetectionResult[0].value.toString().slice(0, 4));
         if (spamDetectionValue > 4 ||
             (message.content.includes('@everyone') && spamDetectionValue > 2)) {
             message.delete();
             //@ts-ignore
-            log.info(`Deleted message from ${message.author.username} in ${message.guild?.name} - ${message.channel.name}`);
+            log.info(`Deleted message from ${message.author.username} in ${message.guild?.name} - ${message.channel.name} : ${spamDetectionValue} : ${message.content}`);
         }
     }
 });
