@@ -29,6 +29,11 @@ log.attachTransport(
 const client = new Discord.Client({ intents: [Discord.Intents.FLAGS.GUILDS, Discord.Intents.FLAGS.GUILD_MESSAGES] });
 client.login(process.env.DISCORD_BOT_TOKEN);
 
+client.on('ready', () => {
+    // Set the client user's activity
+    client.user.setActivity('madge-jimmy.vercel.app', { type: 'STREAMING' });
+});
+
 client.on('messageCreate', message => {
     const spamDetectionResult = SpamDetection.getResults(message.content.replace(/(?:https?|ftp):\/\/[\n\S]+/g, '')).filter((x: { label: string, value: number }) => x.label === 'spam');
     if (spamDetectionResult.length > 0) {
