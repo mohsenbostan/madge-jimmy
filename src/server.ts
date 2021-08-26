@@ -35,6 +35,8 @@ client.on('ready', () => {
 });
 
 client.on('messageCreate', message => {
+    if (message.author.bot) return;
+
     const spamDetectionResult = SpamDetection.getResults(message.content.replace(/(?:https?|ftp):\/\/[\n\S]+/g, '')).filter((x: { label: string, value: number }) => x.label === 'spam');
     if (spamDetectionResult.length > 0) {
         const spamDetectionValue = parseFloat(spamDetectionResult[0].value.toString().slice(0, 4));
